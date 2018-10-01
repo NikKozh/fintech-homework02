@@ -24,10 +24,10 @@ final case class ComplexNumber(unroundedReal: Double, unroundedImaginary: Double
     import scala.math._
 
     val thisPhi = atan2(imaginary, real)
-    val thisR = sqrt(real * real + imaginary * imaginary)
+    val thisR   = sqrt(real * real + imaginary * imaginary)
 
     val newPhi = thisPhi * exponent
-    val newR = pow(thisR, exponent)
+    val newR   = pow(thisR, exponent)
 
     ComplexNumber(newR * cos(newPhi), newR * sin(newPhi))
   }
@@ -40,27 +40,20 @@ final case class ComplexNumber(unroundedReal: Double, unroundedImaginary: Double
   override def hashCode(): Int = (real, imaginary).hashCode()
 
   override def toString: String = {
-    var imaginarySign = imaginary match {
-      case d: Double if d >  0 => " + "
-      case d: Double if d == 0 => ""
-      case d: Double if d <  0 => " - "
+    val imaginarySign = imaginary match {
+      case d: Double if (d > 0) && (real != 0) => " + "
+      case d: Double if (d < 0) && (real != 0) => " - "
+      case d: Double if  d < 0                 => "-"
+      case _                                   => ""
     }
 
     val realString =
-      if (imaginary != 0 && real == 0) {
-        imaginarySign =
-          if (imaginary > 0)
-            ""
-          else
-            imaginarySign.trim
-
+      if (imaginary != 0 && real == 0)
         ""
-      } else {
-        if (real.floor == real)
-          real.toInt.toString
-        else
-          real.toString
-      }
+      else if (real.floor == real) // чтобы избежать
+        real.toInt.toString        // вывода чисел вида "2.0"
+      else
+        real.toString
 
     val imaginaryString =
       if (imaginary != 0) {

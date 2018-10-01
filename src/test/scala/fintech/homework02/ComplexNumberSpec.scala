@@ -19,7 +19,7 @@ class ComplexNumberSpec extends FlatSpec with Matchers {
     result should be (ComplexNumber(-2, -5))
   }
 
-  it should "yield zero for corresponding numbers" in {
+  it should "yield zero for opposited numbers" in {
     val result = ComplexNumber(3, 5) + ComplexNumber(-3, -5)
     result should be (ComplexNumber(0, 0))
   }
@@ -55,7 +55,7 @@ class ComplexNumberSpec extends FlatSpec with Matchers {
 
   it should "be correctly with negative number" in {
     val result = ComplexNumber(3, 5) ~ -2
-    result should be (ComplexNumber(0.01384083045 * -1, 0.025951557093 * -1))
+    result should be (ComplexNumber(-0.01384083045, -0.025951557093))
   }
 
   behavior of "Equality of two complex numbers"
@@ -100,11 +100,11 @@ class ComplexNumberSpec extends FlatSpec with Matchers {
     ComplexNumber(0, 5).toString should be ("5i")
   }
 
-  it should "be correctly when real and imaginary are zero" in {
-    ComplexNumber(0, 0).toString should be ("0")
-  }
-
   it should "be correctly when real is zero and imaginary is negative" in {
     ComplexNumber(0, -5).toString should be ("-5i")
+  }
+
+  it should "be correctly when real and imaginary are zero" in {
+    ComplexNumber(0, 0).toString should be ("0")
   }
 }
