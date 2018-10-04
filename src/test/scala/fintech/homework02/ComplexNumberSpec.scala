@@ -82,6 +82,18 @@ class ComplexNumberSpec extends FlatSpec with Matchers {
     result should be (false)
   }
 
+  it should "be true if numbers with fractional part are equal" in {
+    val result = ComplexNumber(-0.013840830449827, -0.025951557093426) ==
+                 ComplexNumber(-0.013840830449827, -0.025951557093426)
+    result should be (true)
+  }
+
+  it should "be false if numbers with fractional part are not equal" in {
+    val result = ComplexNumber(-0.013840830449827, -0.025951557093426) ==
+                 ComplexNumber(-0.013840830449828, -0.025951557093428)
+    result should be (false)
+  }
+
   behavior of "Printing complex number"
 
   it should "be correctly with floating point numbers" in {
