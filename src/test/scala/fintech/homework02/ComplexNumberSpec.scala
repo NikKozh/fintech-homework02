@@ -48,14 +48,26 @@ class ComplexNumberSpec extends FlatSpec with Matchers {
 
   behavior of "Exponentiation of complex number with integer"
 
+  val epsilon = 1.0E-10
+
   it should "be correctly" in {
-    val result = ComplexNumber(3, 5) ~ 2
-    result should be (ComplexNumber(-16, 30))
+    val appResult = ComplexNumber(3, 5) ~ 2
+    val calculatorResult = ComplexNumber(-16, 30)
+
+    val realDiff = calculatorResult.real - appResult.real
+    val imaginaryDiff = calculatorResult.imaginary - appResult.imaginary
+
+    assert(realDiff.abs < epsilon && imaginaryDiff.abs < epsilon)
   }
 
   it should "be correctly with negative number" in {
-    val result = ComplexNumber(3, 5) ~ -2
-    result should be (ComplexNumber(-0.01384083045, -0.025951557093))
+    val appResult = ComplexNumber(3, 5) ~ -2
+    val calculatorResult = ComplexNumber(-0.013840830449827, -0.025951557093426)
+
+    val realDiff = calculatorResult.real - appResult.real
+    val imaginaryDiff = calculatorResult.imaginary - appResult.imaginary
+
+    assert(realDiff.abs < epsilon && imaginaryDiff.abs < epsilon)
   }
 
   behavior of "Equality of two complex numbers"

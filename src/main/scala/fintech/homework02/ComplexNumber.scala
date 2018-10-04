@@ -8,11 +8,7 @@ import scala.math.BigDecimal.RoundingMode
 // Реализовать оператор возведения в целую степень: "~".
 // Реализовать тесты в ComplexNumberSpec
 
-final case class ComplexNumber(unroundedReal: Double, unroundedImaginary: Double) {
-  // Округление до 12 знаков после запятой, для корректной проверки на равенство
-  private val real: Double = BigDecimal(unroundedReal).setScale(12, RoundingMode.HALF_UP).doubleValue()
-  private val imaginary: Double = BigDecimal(unroundedImaginary).setScale(12, RoundingMode.HALF_UP).doubleValue()
-
+final case class ComplexNumber(real: Double, imaginary: Double) {
   def +(that: ComplexNumber): ComplexNumber =
     ComplexNumber(this.real + that.real, this.imaginary + that.imaginary)
 
